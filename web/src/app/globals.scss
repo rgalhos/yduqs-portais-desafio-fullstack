@@ -1,0 +1,55 @@
+:root {
+  --background: #{variables.$background};
+  --foreground: #{variables.$foreground};
+  --foreground-light: #{variables.$foreground-light};
+  --primary-main: #{variables.$primary-main};
+  --primary-dark: #{variables.$primary-dark};
+  --secondary-main: #{variables.$secondary-main};
+  --secondary-dark: #{variables.$secondary-dark};
+
+  --padding-x-default: #{variables.$padding-x-body};
+}
+
+.vw-adjustable {
+  margin: auto;
+  padding-left: #{variables.$padding-x-body};
+  padding-right: #{variables.$padding-x-body};
+  max-width: 1280px;
+  width: 100%;
+
+  @include variables.md {
+    padding-left: #{variables.$padding-x-body-mobile} !important;
+    padding-right: #{variables.$padding-x-body-mobile} !important;
+  }
+}
+
+@include variables.md {
+  :root {
+    --padding-x-default: #{variables.$padding-x-body-mobile} !important;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: variables.$default-font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
