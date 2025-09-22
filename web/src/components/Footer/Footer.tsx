@@ -1,12 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { Box, Grid, Stack, styled, useMediaQuery } from "@mui/material";
-import { ContactInfo } from "@/components/ContactInfo/ContactInfo";
+import Link from "next/link";
+import { SyntheticEvent, useState } from "react";
+import {
+  Box,
+  Divider,
+  Grid,
+  Stack,
+  styled,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { FooterNavColumn } from "@/components/FooterNavColumn/FooterNavColumn";
+import { FooterNavAccordion } from "@/components/FooterNavAccordion/FooterNavAccordion";
+import { FooterContactInfo } from "@/components/FooterContactInfo/FooterContactInfo";
 import EstacioLogoWhite from "@public/estacio-logo-white.svg";
 import ContactWhatsapp from "@public/contact-whatsapp.svg";
 import ContactPhone from "@public/contact-phone.svg";
-import { FooterMenuGroup } from "../FooterNavColumn/FooterNavColumn";
+import EMecQRCode from "@public/e-mec-qr-code.svg";
 
 const navigationItems = [
   {
@@ -114,8 +126,8 @@ const FooterContainer = styled("footer")(({ theme }) => ({
     },
   },
 
-  hr: {
-    color: "var(--foreground-light)",
+  "& .copyright": {
+    padding: theme.spacing(7, 0),
   },
 
   [theme.breakpoints.down("md")]: {
@@ -123,6 +135,10 @@ const FooterContainer = styled("footer")(({ theme }) => ({
       padding: theme.spacing(6, 0),
       gap: theme.spacing(4),
       flexDirection: "column",
+    },
+
+    "& .copyright": {
+      padding: theme.spacing(6, 0),
     },
   },
 }));
@@ -159,26 +175,60 @@ const FooterNavSection = styled(Box)(({ theme }) => ({
   paddingBottom: theme.spacing(8),
 
   [theme.breakpoints.down("md")]: {
-    paddingTop: theme.spacing(6),
-    paddingBottom: theme.spacing(6),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+  },
+}));
+
+const FooterLegalSection = styled(Box)(({ theme }) => ({
+  paddingTop: theme.spacing(6),
+  paddingBottom: theme.spacing(6),
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  gap: theme.spacing(6),
+
+  ".legal-items": {
+    gap: theme.spacing(2),
+
+    ".MuiTypography-root": {
+      height: "32px",
+    },
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    gap: theme.spacing(1),
+    flexDirection: "column-reverse",
+    alignItems: "flex-start",
+
+    ".legal-items": {
+      gap: theme.spacing(1),
+      marginTop: theme.spacing(6),
+    },
   },
 }));
 
 export const Footer = () => {
   const mdBreakpoint = useMediaQuery((theme) => theme.breakpoints.down("md"));
   const lgBreakpoint = useMediaQuery((theme) => theme.breakpoints.down("lg"));
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  const toggleExpand =
+    (panel: number) => (_event: SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : null);
+    };
 
   const contactInfo = (
     <Box className="contact-info">
-      <ContactInfo
+      <FooterContactInfo
+        icon={<Image src={ContactPhone} alt="phone" />}
+        label="0800 771 5055"
+        href="tel:08007715055"
+      />
+      <FooterContactInfo
         icon={<Image src={ContactWhatsapp} alt="phone" />}
         label="Precisa de ajuda?"
         href="#"
-      />
-      <ContactInfo
-        icon={<Image src={ContactPhone} alt="phone" />}
-        label="0800 771 5055"
-        href="tel:0800 771 5055"
       />
     </Box>
   );
@@ -193,29 +243,78 @@ export const Footer = () => {
           {!mdBreakpoint && contactInfo}
         </Box>
       </FooterHeaderWrapper>
+      {mdBreakpoint && <Box className="vw-adjustable">{contactInfo}</Box>}
 
       {mdBreakpoint && (
         <Box className="vw-adjustable">
-          {contactInfo}
-          <hr />
+          <Divider sx={{ borderColor: "var(--foreground-light)" }} />
         </Box>
       )}
 
-      <FooterNavSection className="vw-adjustable">
-        {lgBreakpoint ? (
-          <>dijdjidjoi</>
-        ) : (
+      {!lgBreakpoint && (
+        <FooterNavSection className="vw-adjustable">
           <Grid container sx={{ rowGap: 8 }}>
             {navigationItems.map((item, i) => (
               <Grid key={i} container sx={{ width: "25%" }}>
-                <FooterMenuGroup title={item.title} items={item.items} />
+                <FooterNavColumn title={item.title} items={item.items} />
               </Grid>
             ))}
           </Grid>
-        )}
-      </FooterNavSection>
+        </FooterNavSection>
+      )}
 
-      <hr className="vw-adjustable" />
+      {lgBreakpoint && (
+        <FooterNavSection>
+          {navigationItems.map((item, i) => (
+            <FooterNavAccordion
+              key={i}
+              expanded={expanded === i}
+              onChange={toggleExpand(i)}
+              title={item.title}
+              items={item.items}
+            />
+          ))}
+        </FooterNavSection>
+      )}
+
+      <Box className="vw-adjustable">
+        <Divider sx={{ borderColor: "var(--foreground-light)" }} />
+      </Box>
+
+      <FooterLegalSection className="vw-adjustable">
+        <Stack
+          className="legal-items"
+          display="flex"
+          flexDirection="column"
+          flexGrow={1}
+        >
+          <Typography component={Link} href="#">
+            Política de privacidade
+          </Typography>
+          <Typography component={Link} href="#">
+            Código de Ética
+          </Typography>
+          <Typography component={Link} href="#">
+            Preferência de cookies
+          </Typography>
+          <Typography component={Link} href="#">
+            Mapa do site
+          </Typography>
+        </Stack>
+        <Image src={EMecQRCode} alt="e-mec qr code" />
+      </FooterLegalSection>
+
+      <Box className="vw-adjustable">
+        <Divider sx={{ borderColor: "var(--foreground-light)" }} />
+      </Box>
+
+      <Box className="vw-adjustable">
+        <Box className="copyright">
+          <Typography variant="body1">
+            Estácio Brasil - Todos os direitos reservados
+          </Typography>
+        </Box>
+      </Box>
     </FooterContainer>
   );
 };

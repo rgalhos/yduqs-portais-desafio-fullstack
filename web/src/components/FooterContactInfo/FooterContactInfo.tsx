@@ -1,17 +1,17 @@
 import { Box, BoxProps, Typography } from "@mui/material";
 
-export interface IContactInfoProps extends BoxProps {
+export interface IFooterContactInfoProps extends BoxProps {
   icon: React.ReactNode;
   label: string;
   href?: string;
 }
 
-export const ContactInfo = ({
+export const FooterContactInfo = ({
   icon,
   label,
   href,
   ...props
-}: IContactInfoProps) => {
+}: IFooterContactInfoProps) => {
   return (
     <Box
       component="a"

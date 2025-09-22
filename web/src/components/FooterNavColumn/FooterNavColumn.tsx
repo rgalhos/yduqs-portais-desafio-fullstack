@@ -1,17 +1,17 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 
-export interface IFooterMenuGroupItem {
+export interface IFooterNavColumnItem {
   label: string;
   href: string;
 }
 
-export interface IFooterMenuGroupProps {
+export interface IFooterNavColumnProps {
   title: string;
-  items: IFooterMenuGroupItem[];
+  items: IFooterNavColumnItem[];
 }
 
-const NavigationItem = ({ label, href }: IFooterMenuGroupItem) => (
+const NavigationItem = ({ label, href }: IFooterNavColumnItem) => (
   <Box sx={{ height: "32px" }}>
     <Typography component={Link} href={href}>
       {label}
@@ -19,7 +19,7 @@ const NavigationItem = ({ label, href }: IFooterMenuGroupItem) => (
   </Box>
 );
 
-export const FooterMenuGroup = ({ title, items }: IFooterMenuGroupProps) => {
+export const FooterNavColumn = ({ title, items }: IFooterNavColumnProps) => {
   return (
     <Stack display="flex" flexDirection="column" gap={1}>
       <Typography
