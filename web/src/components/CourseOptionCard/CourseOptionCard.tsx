@@ -1,15 +1,16 @@
 "use client";
 
-import { Box, Icon, Stack, styled, SvgIcon, Typography } from "@mui/material";
+import { Box, Button, Stack, styled, SvgIcon, Typography } from "@mui/material";
 
 export type ICourseOptionCardProps = {
   type: "detailed" | "info";
-  title: string | React.ReactNode;
+  modality: string;
+  shift?: string;
   location?: {
     unit: string;
     address?: string;
   };
-  // onAction: () => void;
+  onAction?: () => void;
 } & (
   | { type: "info"; info: string }
   | ({
@@ -24,10 +25,10 @@ export interface ICourseOptionCardBodyDetailedProps {
   noInstallments: number;
 }
 
-const CourseOptionCardWrapper = styled(Box)(({ theme }) => ({
-  maxWidth: "380px",
-  width: "100%",
-}));
+const CourseOptionCardWrapper = styled(Box)({
+  maxWidth: "100%",
+  minWidth: "250px",
+});
 
 const CourseOptionCardHeader = styled(Box)(({ theme }) => ({
   background: theme.palette.primary.dark,
@@ -43,7 +44,7 @@ const CourseOptionCardHeader = styled(Box)(({ theme }) => ({
 const CourseOptionCardContent = styled(Box)(({ theme }) => ({
   background: theme.palette.primary.main,
   color: theme.palette.primary.contrastText,
-  padding: theme.spacing(6, 4),
+  padding: theme.spacing(6),
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
@@ -119,7 +120,8 @@ export const CourseOptionCard = (props: ICourseOptionCardProps) => {
             </SvgIcon>
           }
         >
-          {props.title}
+          <span>{props.modality}</span>
+          {props.shift && <span>{props.shift}</span>}
         </Typography>
       </CourseOptionCardHeader>
 
@@ -133,6 +135,19 @@ export const CourseOptionCard = (props: ICourseOptionCardProps) => {
       )}
 
       {props.type === "info" && <>todo</>}
+
+      {props.onAction && (
+        <CourseOptionCardContent sx={{ pt: 0, pb: 4 }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            fullWidth
+            onClick={props.onAction}
+          >
+            Avançar
+          </Button>
+        </CourseOptionCardContent>
+      )}
 
       {props.location && (
         <CourseOptionCardFooter>
