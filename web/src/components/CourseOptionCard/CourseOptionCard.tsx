@@ -85,7 +85,7 @@ const CourseOptionCardHeader = ({
 const CourseOptionCardContent = styled(Box)(({ theme }) => ({
   background: theme.palette.primary.main,
   color: theme.palette.primary.contrastText,
-  padding: theme.spacing(6),
+  padding: theme.spacing(6, 4),
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
@@ -152,47 +152,43 @@ const CourseOptionCardBodyDetailed = (
 
 const CourseOptionCardBodyInfo = ({ info }: { info: string }) => (
   <CourseOptionCardContent sx={{ gap: 2 }}>
-    <Typography>
-      <Image src={InfoIcon} alt="" />
-    </Typography>
+    <Image src={InfoIcon} alt="" />
     <Typography variant="body2">{info}</Typography>
   </CourseOptionCardContent>
 );
 
-export const CourseOptionCard = (props: ICourseOptionCardProps) => {
-  return (
-    <CourseOptionCardWrapper>
-      <CourseOptionCardHeader labelItems={[props.modality, props.shift]} />
+export const CourseOptionCard = (props: ICourseOptionCardProps) => (
+  <CourseOptionCardWrapper>
+    <CourseOptionCardHeader labelItems={[props.modality, props.shift]} />
 
-      {props.type === "detailed" && (
-        <CourseOptionCardBodyDetailed
-          currentPrice={props.currentPrice}
-          originalPrice={props.originalPrice}
-          installment={props.installment}
-        />
-      )}
+    {props.type === "detailed" && (
+      <CourseOptionCardBodyDetailed
+        currentPrice={props.currentPrice}
+        originalPrice={props.originalPrice}
+        installment={props.installment}
+      />
+    )}
 
-      {props.type === "info" && <CourseOptionCardBodyInfo info={props.info} />}
+    {props.type === "info" && <CourseOptionCardBodyInfo info={props.info} />}
 
-      {props.onAction && (
-        <CourseOptionCardContent sx={{ pt: 0, pb: 4 }}>
-          <Button
-            color="secondary"
-            variant="contained"
-            fullWidth
-            onClick={props.onAction}
-          >
-            Avançar
-          </Button>
-        </CourseOptionCardContent>
-      )}
+    {props.onAction && (
+      <CourseOptionCardContent sx={{ pt: 0, pb: 4 }}>
+        <Button
+          color="secondary"
+          variant="contained"
+          fullWidth
+          onClick={props.onAction}
+        >
+          Avançar
+        </Button>
+      </CourseOptionCardContent>
+    )}
 
-      {props.location && (
-        <CourseOptionCardFooter
-          unit={props.location.unit}
-          address={props.location.address}
-        />
-      )}
-    </CourseOptionCardWrapper>
-  );
-};
+    {props.location && (
+      <CourseOptionCardFooter
+        unit={props.location.unit}
+        address={props.location.address}
+      />
+    )}
+  </CourseOptionCardWrapper>
+);
