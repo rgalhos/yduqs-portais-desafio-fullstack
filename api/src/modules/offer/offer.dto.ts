@@ -71,6 +71,6 @@ export class OfferDto {
 export class GetAllOffersOutDto {
   @IsArray()
   @Type(() => OfferDto)
-  @ApiProperty({ description: 'List of active offers', type: 'string' })
+  @ApiProperty({ description: 'List of active offers', type: [OfferDto] })
   items: OfferDto[];
 }
