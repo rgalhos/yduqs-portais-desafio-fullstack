@@ -4,12 +4,18 @@ import Image from "next/image";
 import { Box, Button, Stack, styled, SvgIcon, Typography } from "@mui/material";
 import { IInstallment } from "@/shared/interfaces/offer.interface";
 import { formatCurrency } from "@/lib/utils/currency.util";
+import { ECourseModality } from "@/shared/enums/course-modality.enum";
+import { ECourseShift } from "@/shared/enums/course-shift.enum";
+import {
+  translateModality,
+  translateShift,
+} from "@/lib/utils/enum-translation.util";
 import InfoIcon from "@public/info.svg";
 
 export type IOfferCardProps = {
   type: "detailed" | "info";
-  modality: string;
-  shift?: string;
+  modality: ECourseModality;
+  shift?: ECourseShift;
   unit: string;
   address: string;
   onAction?: () => void;
@@ -121,9 +127,7 @@ const CourseOptionCardFooter = ({
   </Box>
 );
 
-const CourseOptionCardBodyDetailed = (
-  props: IOfferCardBodyDetailedProps
-) => (
+const CourseOptionCardBodyDetailed = (props: IOfferCardBodyDetailedProps) => (
   <CourseOptionCardContent>
     {props.originalPrice && (
       <Typography variant="body1" fontWeight={500} lineHeight="115%">
@@ -157,7 +161,12 @@ const CourseOptionCardBodyInfo = ({ info }: { info: string }) => (
 
 export const CourseOptionCard = (props: IOfferCardProps) => (
   <CourseOptionCardWrapper>
-    <CourseOptionCardHeader labelItems={[props.modality, props.shift]} />
+    <CourseOptionCardHeader
+      labelItems={[
+        translateModality(props.modality),
+        props.shift && translateShift(props.shift),
+      ]}
+    />
 
     {props.type === "detailed" && (
       <CourseOptionCardBodyDetailed

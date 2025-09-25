@@ -1,8 +1,5 @@
 import Image from "next/image";
-import {
-  IOffer,
-  IInstallment,
-} from "@/shared/interfaces/offer.interface";
+import { IOffer, IInstallment } from "@/shared/interfaces/offer.interface";
 import {
   Accordion,
   AccordionDetails,
@@ -16,7 +13,7 @@ import CloseIcon from "@public/close.svg";
 import PlusIcon from "@public/plus.svg";
 
 interface IOfferDetailsDrawerProps {
-  installments?: IInstallment[];
+  offer: IOffer;
   open: boolean;
   onClose: () => void;
 }
@@ -55,12 +52,13 @@ const DetailAccordion = ({
 );
 
 export const OfferDetailsDrawer = ({
-  installments,
+  offer,
   open,
   onClose,
 }: IOfferDetailsDrawerProps) => {
   return (
     <Drawer
+      keepMounted={false}
       variant="persistent"
       anchor="right"
       open={open}

@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
 import { PageHeading } from "@/components/PageHeading/PageHeading";
-import { CourseOptionsContainer } from "./_components/CourseOptionsContainer";
+import { OfferOptionsContainer } from "./_components/OfferOptionsContainer";
 import { IOffer } from "@/shared/interfaces/offer.interface";
 import { client } from "@/lib/api";
 
@@ -25,7 +25,7 @@ export default function Home({
       />
 
       <Box component="main" sx={{ pt: 8, pb: 14 }}>
-        <CourseOptionsContainer offers={offers} />
+        <OfferOptionsContainer offers={offers} />
       </Box>
     </div>
   );

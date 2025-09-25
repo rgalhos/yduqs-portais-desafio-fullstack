@@ -6,13 +6,13 @@ import { useState } from "react";
 import { IOffer } from "@/shared/interfaces/offer.interface";
 import { OfferDetailsDrawer } from "@/components/OfferDetailsDrawer/OfferDetailsDrawer";
 
-export interface ICourseOptionsContainerProps {
+export interface IOfferOptionsContainerProps {
   offers: IOffer[];
 }
 
-export const CourseOptionsContainer = ({
+export const OfferOptionsContainer = ({
   offers,
-}: ICourseOptionsContainerProps) => {
+}: IOfferOptionsContainerProps) => {
   const [currentOffer, setCurrentOffer] = useState<IOffer | null>();
   const [offerDrawerOpen, setOfferDrawerOpen] = useState(false);
 
@@ -55,11 +55,13 @@ export const CourseOptionsContainer = ({
           ))}
         </Grid>
 
-        <OfferDetailsDrawer
-          installments={currentOffer?.installments}
-          open={offerDrawerOpen}
-          onClose={handleCloseOffer}
-        />
+        {currentOffer && (
+          <OfferDetailsDrawer
+            offer={currentOffer!}
+            open={offerDrawerOpen}
+            onClose={handleCloseOffer}
+          />
+        )}
       </Box>
     </>
   );
