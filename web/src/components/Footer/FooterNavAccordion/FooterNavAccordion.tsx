@@ -10,7 +10,7 @@ import {
 import {
   IFooterNavColumnItem,
   IFooterNavColumnProps,
-} from "@/components/FooterNavColumn/FooterNavColumn";
+} from "@/components/Footer/FooterNavColumn/FooterNavColumn";
 import ChevronDownIcon from "@public/chevron-down.svg";
 import Link from "next/link";
 

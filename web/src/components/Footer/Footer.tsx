@@ -12,8 +12,8 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import { FooterNavColumn } from "@/components/FooterNavColumn/FooterNavColumn";
-import { FooterNavAccordion } from "@/components/FooterNavAccordion/FooterNavAccordion";
+import { FooterNavColumn } from "@/components/Footer/FooterNavColumn/FooterNavColumn";
+import { FooterNavAccordion } from "@/components/Footer/FooterNavAccordion/FooterNavAccordion";
 import { FooterContactInfo } from "@/components/FooterContactInfo/FooterContactInfo";
 import EstacioLogoWhite from "@public/estacio-logo-white.svg";
 import ContactWhatsapp from "@public/contact-whatsapp.svg";
