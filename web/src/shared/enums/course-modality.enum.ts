@@ -1,0 +1,5 @@
+export enum ECourseModality {
+  PRESENCIAL = 'PRESENCIAL',
+  EAD = 'EAD',
+  SEMIPRESENCIAL = 'SEMIPRESENCIAL',
+}

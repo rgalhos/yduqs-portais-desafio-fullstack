@@ -1,0 +1,6 @@
+export enum ECourseShift {
+  MORNING = 'MORNING',
+  AFTERNOON = 'AFTERNOON',
+  EVENING = 'EVENING',
+  FULL_TIME = 'FULL_TIME',
+}

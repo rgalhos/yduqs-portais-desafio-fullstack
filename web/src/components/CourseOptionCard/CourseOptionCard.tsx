@@ -2,30 +2,28 @@
 
 import Image from "next/image";
 import { Box, Button, Stack, styled, SvgIcon, Typography } from "@mui/material";
-import { IInstallment } from "@/shared/interfaces/course.interface";
+import { IInstallment } from "@/shared/interfaces/offer.interface";
 import { formatCurrency } from "@/lib/utils/currency.util";
 import InfoIcon from "@public/info.svg";
 
-export type ICourseOptionCardProps = {
+export type IOfferCardProps = {
   type: "detailed" | "info";
   modality: string;
   shift?: string;
-  location?: {
-    unit: string;
-    address?: string;
-  };
+  unit: string;
+  address: string;
   onAction?: () => void;
 } & (
-  | { type: "info"; info: string }
+  | { type: "info"; details: string }
   | ({
       type: "detailed";
-    } & ICourseOptionCardBodyDetailedProps)
+    } & IOfferCardBodyDetailedProps)
 );
 
-export interface ICourseOptionCardBodyDetailedProps {
+export interface IOfferCardBodyDetailedProps {
   originalPrice?: number;
   currentPrice: number;
-  installment: IInstallment;
+  installments: IInstallment;
 }
 
 const CourseOptionCardWrapper = styled(Box)({
@@ -124,7 +122,7 @@ const CourseOptionCardFooter = ({
 );
 
 const CourseOptionCardBodyDetailed = (
-  props: ICourseOptionCardBodyDetailedProps
+  props: IOfferCardBodyDetailedProps
 ) => (
   <CourseOptionCardContent>
     {props.originalPrice && (
@@ -135,10 +133,10 @@ const CourseOptionCardBodyDetailed = (
 
     <div>
       <Typography display="inline" fontWeight={500} fontSize={16}>
-        {props.installment.months}x
+        {props.installments.months}x
       </Typography>
       <Typography display="inline" fontWeight={600} fontSize={40}>
-        {formatCurrency(props.installment.value)}
+        {formatCurrency(props.installments.value)}
       </Typography>
     </div>
 
@@ -157,7 +155,7 @@ const CourseOptionCardBodyInfo = ({ info }: { info: string }) => (
   </CourseOptionCardContent>
 );
 
-export const CourseOptionCard = (props: ICourseOptionCardProps) => (
+export const CourseOptionCard = (props: IOfferCardProps) => (
   <CourseOptionCardWrapper>
     <CourseOptionCardHeader labelItems={[props.modality, props.shift]} />
 
@@ -165,11 +163,11 @@ export const CourseOptionCard = (props: ICourseOptionCardProps) => (
       <CourseOptionCardBodyDetailed
         currentPrice={props.currentPrice}
         originalPrice={props.originalPrice}
-        installment={props.installment}
+        installments={props.installments}
       />
     )}
 
-    {props.type === "info" && <CourseOptionCardBodyInfo info={props.info} />}
+    {props.type === "info" && <CourseOptionCardBodyInfo info={props.details} />}
 
     {props.onAction && (
       <CourseOptionCardContent sx={{ pt: 0, pb: 4 }}>
@@ -184,11 +182,6 @@ export const CourseOptionCard = (props: ICourseOptionCardProps) => (
       </CourseOptionCardContent>
     )}
 
-    {props.location && (
-      <CourseOptionCardFooter
-        unit={props.location.unit}
-        address={props.location.address}
-      />
-    )}
+    <CourseOptionCardFooter unit={props.unit} address={props.address} />
   </CourseOptionCardWrapper>
 );

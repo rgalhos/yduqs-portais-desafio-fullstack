@@ -1,8 +1,8 @@
 import Image from "next/image";
 import {
-  ICourseOption,
+  IOffer,
   IInstallment,
-} from "@/shared/interfaces/course.interface";
+} from "@/shared/interfaces/offer.interface";
 import {
   Accordion,
   AccordionDetails,
