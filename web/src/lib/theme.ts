@@ -8,10 +8,12 @@ export const theme = createTheme({
     primary: {
       main: "#144BC8",
       dark: "#001F66",
+      contrastText: "#FFFFFF",
     },
     secondary: {
       main: "#EE325D",
       dark: "#AE052B",
+      contrastText: "#FFFFFF"
     },
   },
   typography: {
@@ -20,6 +22,7 @@ export const theme = createTheme({
       fontSize: "32px",
       lineHeight: "120%",
       fontWeight: 500,
+      fontFamily: "var(--font-montserrat)",
     },
     body1: {
       fontSize: "16px",
@@ -56,6 +59,21 @@ export const theme = createTheme({
             fontSize: "24px",
           },
         }),
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        label: {
+          fontWeight: 500,
+          lineHeight: "133%",
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          paddingRight: "6px",
+        },
       },
     },
   },

@@ -110,31 +110,27 @@ const navigationItems = [
 const FooterContainer = styled("footer")(({ theme }) => ({
   position: "static",
   background: theme.palette.primary.dark,
-  color: "var(--foreground-light)",
+  color: theme.palette.primary.contrastText,
 
   "& .contact-info": {
     display: "flex",
     flexDirection: "row",
-    fontWeight: 600,
     gap: theme.spacing(14),
-
-    "& .contact-info-item": {
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      gap: theme.spacing(3),
-    },
   },
 
   "& .copyright": {
     padding: theme.spacing(7, 0),
   },
 
+  ".MuiDivider-root": {
+    borderColor: theme.palette.primary.contrastText,
+  },
+
   [theme.breakpoints.down("md")]: {
     "& .contact-info": {
       padding: theme.spacing(6, 0),
       gap: theme.spacing(4),
-      flexDirection: "column",
+      flexDirection: "column-reverse",
     },
 
     "& .copyright": {
@@ -247,7 +243,7 @@ export const Footer = () => {
 
       {mdBreakpoint && (
         <Box className="vw-adjustable">
-          <Divider sx={{ borderColor: "var(--foreground-light)" }} />
+          <Divider />
         </Box>
       )}
 
@@ -278,7 +274,7 @@ export const Footer = () => {
       )}
 
       <Box className="vw-adjustable">
-        <Divider sx={{ borderColor: "var(--foreground-light)" }} />
+        <Divider />
       </Box>
 
       <FooterLegalSection className="vw-adjustable">
@@ -305,7 +301,7 @@ export const Footer = () => {
       </FooterLegalSection>
 
       <Box className="vw-adjustable">
-        <Divider sx={{ borderColor: "var(--foreground-light)" }} />
+        <Divider />
       </Box>
 
       <Box className="vw-adjustable">

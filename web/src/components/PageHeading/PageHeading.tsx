@@ -12,7 +12,7 @@ const PageHeadingWrapper = styled(Box)(({ theme }) => ({
   paddingBottom: theme.spacing(10),
   gap: theme.spacing(2),
   background: theme.palette.primary.main,
-  color: "var(--foreground-light)",
+  color: theme.palette.primary.contrastText,
   display: "flex",
   flexDirection: "column",
 

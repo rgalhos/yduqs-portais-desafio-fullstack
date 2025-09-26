@@ -1,4 +1,5 @@
 import { InferGetServerSidePropsType } from "next";
+import Head from "next/head";
 import { Box } from "@mui/material";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
@@ -33,6 +34,10 @@ export default function Home({
 
 Home.getLayout = (page: React.ReactElement) => (
   <>
+    <Head>
+      <title>Estácio</title>
+    </Head>
+
     <Header />
     {page}
     <Footer />
