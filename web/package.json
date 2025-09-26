@@ -7,7 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",

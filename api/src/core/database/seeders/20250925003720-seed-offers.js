@@ -7,6 +7,7 @@ module.exports = {
       'offers',
       [
         {
+          id: 1,
           currentPrice: 2613.6,
           originalPrice: 4752.0,
           installments: `[
@@ -28,6 +29,7 @@ module.exports = {
           updatedAt: Sequelize.literal('NOW()'),
         },
         {
+          id: 2,
           modality: 'EAD',
           details:
             'Inscreva-se para saber tudo sobre os valores e garantir a sua vaga!',

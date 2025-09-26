@@ -1,0 +1,48 @@
+services:
+  db:
+    image: "postgres"
+    env_file:
+      - ./api/.env
+    environment:
+      POSTGRES_HOST: ${DATABASE_HOST}
+      POSTGRES_PORT: ${DATABASE_PORT}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_DB}
+    volumes:
+      - postgres_data:/data
+    ports:
+      - "5435:5432"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  api:
+    build: ./api
+    restart: unless-stopped
+    env_file:
+      - ./api/.env
+    ports:
+      - "3051:3000"
+    networks:
+      - app-network
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    build: ./web
+    env_file:
+      - ./web/.env
+    ports:
+      - "3052:3000"
+    networks:
+      - app-network
+    restart: unless-stopped
+volumes:
+  postgres_data:
+networks:
+  app-network:
