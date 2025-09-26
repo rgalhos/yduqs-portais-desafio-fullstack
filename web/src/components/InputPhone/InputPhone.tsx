@@ -27,7 +27,7 @@ const MaskedInputPhone = forwardRef<HTMLInputElement, IMaskedInputProps>(
     const handleOnChange = (event: {
       target: { name: string; value: string };
     }) => {
-      if (event.target.value.length === 11) {
+      if (event.target.value.length === NINE_DIGIT_MASK.length) {
         setMask(NINE_DIGIT_MASK);
       } else {
         setMask(EIGHT_DIGIT_MASK);
@@ -49,7 +49,6 @@ const MaskedInputPhone = forwardRef<HTMLInputElement, IMaskedInputProps>(
         onAccept={(value) =>
           handleOnChange({ target: { name: props.name as string, value } })
         }
-        unmask
         overwrite
       />
     );
@@ -62,8 +61,9 @@ export const InputPhone = ({
 }: IInputPhoneProps & InputProps) => {
   return (
     <FormControl>
-      <InputLabel>{label}</InputLabel>
+      <InputLabel htmlFor="phone">{label}</InputLabel>
       <OutlinedInput
+        id="phone"
         label={label}
         {...props}
         // @ts-expect-error Incompatible type

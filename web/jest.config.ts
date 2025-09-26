@@ -95,7 +95,7 @@ const config: Config = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-     "^@/(.*)$": "<rootDir>/src/$1",
+    "^@/(.*)$": "<rootDir>/src/$1",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -172,7 +172,7 @@ const config: Config = {
   // ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
-  // testRegex: [],
+  testRegex: [".*\\.test\\.tsx?$"],
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: undefined,
@@ -182,14 +182,17 @@ const config: Config = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.ts$": "ts-jest",
+    "^.+\\.tsx$": [
+      "babel-jest",
+      {
+        configFile: "./babel.config.test.js",
+      },
+    ],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  // transformIgnorePatterns: [
-  //   "/node_modules/",
-  //   "\\.pnp\\.[^\\/]+$"
-  // ],
+  transformIgnorePatterns: ["/node_modules/", "\\.pnp\\.[^\\/]+$"],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

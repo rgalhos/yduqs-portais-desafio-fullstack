@@ -59,8 +59,9 @@ export const InputDate = ({
 }: IInputDateProps & InputProps) => {
   return (
     <FormControl>
-      <InputLabel>{label}</InputLabel>
+      <InputLabel htmlFor="date">{label}</InputLabel>
       <OutlinedInput
+        id="date"
         label={label}
         {...props}
         // @ts-expect-error Incompatible type

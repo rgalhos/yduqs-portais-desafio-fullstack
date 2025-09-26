@@ -28,7 +28,6 @@ const MaskedInputCPF = forwardRef<HTMLInputElement, IMaskedInputProps>(
         onAccept={(value) =>
           onChange?.({ target: { name: props.name, value } })
         }
-        unmask
         overwrite
       />
     );
@@ -38,8 +37,9 @@ const MaskedInputCPF = forwardRef<HTMLInputElement, IMaskedInputProps>(
 export const InputCPF = ({ label, ...props }: IInputCPFProps & InputProps) => {
   return (
     <FormControl>
-      <InputLabel>{label}</InputLabel>
+      <InputLabel htmlFor="cpf">{label}</InputLabel>
       <OutlinedInput
+        id="cpf"
         label={label}
         {...props}
         // @ts-expect-error Incompatible type
