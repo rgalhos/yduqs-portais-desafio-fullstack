@@ -13,7 +13,7 @@ export const theme = createTheme({
     secondary: {
       main: "#EE325D",
       dark: "#AE052B",
-      contrastText: "#FFFFFF"
+      contrastText: "#FFFFFF",
     },
   },
   typography: {
@@ -73,6 +73,55 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           paddingRight: "6px",
+        },
+      },
+    },
+    MuiTableContainer: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderRadius: "8px",
+          borderWidth: "1px",
+          borderStyle: "solid",
+          borderColor: theme.palette.primary.main,
+        }),
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.primary.main,
+          height: "42px",
+
+          ".MuiTableCell-root": {
+            color: theme.palette.primary.contrastText,
+            padding: 0,
+            paddingLeft: theme.spacing(4),
+            paddingRight: theme.spacing(4),
+            fontSize: "16px",
+            fontWeight: 500,
+          },
+        }),
+      },
+    },
+    MuiTableBody: {
+      styleOverrides: {
+        root: {
+          ".MuiTableRow-root": {
+            height: "56px",
+
+            ".MuiTypography-root": {
+              fontSize: "14px",
+              fontWeight: 500,
+              lineHeight: "117%",
+            },
+          },
+        },
+      },
+    },
+    MuiRadio: {
+      styleOverrides: {
+        checked: {
+          color: "#f00",
         },
       },
     },

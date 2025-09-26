@@ -7,6 +7,7 @@ export interface IInstallment {
 }
 
 export interface IOffer {
+  id: number;
   originalPrice: number;
   currentPrice: number;
   installments: IInstallment[];
