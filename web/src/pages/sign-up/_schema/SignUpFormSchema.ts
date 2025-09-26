@@ -10,7 +10,12 @@ export const signupFormSchema = z.object({
     .transform((v) => v.replace(/[^\d]/g, "")),
   birthDate: z
     .string()
-    .min(10, { message: "A data de nascimento fornecida não é válida" }),
+    .min(10, { message: "A data de nascimento fornecida não é válida" })
+    .transform((v) => {
+      const [day, month, year] = v.split("/");
+
+      return [year, month, day].join("-");
+    }),
   // z.coerce.date({
   //   message: "A data de nascimento fornecida não é válida",
   // }),
@@ -26,6 +31,7 @@ export const signupFormSchema = z.object({
     .regex(/^\d{4}$/, { message: "O ano de graduação fornecido não é válido" })
     .transform(Number),
   whatsappOptIn: z.boolean(),
+  offerId: z.coerce.number(),
 });
 
 export type TSignUpFormData = z.infer<typeof signupFormSchema>;

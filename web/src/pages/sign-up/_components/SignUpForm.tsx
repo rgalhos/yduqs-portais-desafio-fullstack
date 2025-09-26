@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FieldError, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Box,
@@ -18,12 +18,14 @@ import { InputDate } from "@/components/InputDate/InputDate";
 import { InputCPF } from "@/components/InputCPF/InputCPF";
 import { InputControl } from "@/components/InputControl/InputControl";
 import { signupFormSchema, TSignUpFormData } from "../_schema/SignUpFormSchema";
+import { useRouter } from "next/router";
 
 export interface ISignUpFormProps {
   onSubmit: (data: TSignUpFormData) => void;
 }
 
 export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
+  const router = useRouter();
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const {
     register,
@@ -31,6 +33,7 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
     formState: { errors, isValid },
   } = useForm({
     resolver: zodResolver(signupFormSchema),
+    mode: "onBlur",
   });
 
   return (
@@ -60,7 +63,7 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
         />
 
         <InputControl
-          error={errors.birthDate as FieldError}
+          error={errors.birthDate}
           render={
             <InputDate
               label="Data de nascimento"
@@ -133,6 +136,11 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
           control={<Checkbox name="whatsappOptIn" />}
           label="Aceito receber atualizações sobre minha inscrição pelo WhatsApp."
           {...register("whatsappOptIn")}
+        />
+
+        <input
+          type="hidden"
+          {...register("offerId", { value: router.query.id })}
         />
       </Stack>
 
