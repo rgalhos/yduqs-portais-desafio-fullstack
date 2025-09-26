@@ -14,6 +14,7 @@ import {
 import CloseIcon from "@public/close.svg";
 import PlusIcon from "@public/plus.svg";
 import { InstallmentsTable } from "../InstallmentsTable/InstallmentsTable";
+import { CardInfo } from "../CardInfo/CardInfo";
 
 interface IOfferDetailsDrawerProps {
   offer: IOffer;
@@ -82,38 +83,52 @@ export const OfferDetailsDrawer = ({
         },
       }}
     >
-      <Box sx={{ px: { xs: 4, md: 8 } }}>
-        <Stack
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          justifyContent="space-between"
-          py={{ xs: 5, md: 6 }}
+      <Stack
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ px: { xs: 4, md: 8 }, py: { xs: 5, md: 6 } }}
+      >
+        <Typography
+          fontFamily="var(--font-montserrat)"
+          fontWeight={500}
+          fontSize={32}
+          lineHeight="120%"
         >
-          <Typography
-            fontFamily="var(--font-montserrat)"
-            fontWeight={500}
-            fontSize={32}
-            lineHeight="120%"
-          >
-            Mais detalhes
-          </Typography>
-          <Box
-            onClick={onClose}
-            sx={{ cursor: "pointer" }}
-            height={{ xs: 40, md: 48 }}
-            display="flex"
-            alignItems="center"
-          >
-            <Box component={Image} src={CloseIcon} alt="close" m="auto" />
-          </Box>
-        </Stack>
+          Mais detalhes
+        </Typography>
+        <Box
+          onClick={onClose}
+          sx={{ cursor: "pointer" }}
+          height={{ xs: 40, md: 48 }}
+          display="flex"
+          alignItems="center"
+        >
+          <Box component={Image} src={CloseIcon} alt="close" m="auto" />
+        </Box>
+      </Stack>
 
+      {offer.details && (
+        <Box sx={{ mb: { xs: 6, md: 8 } }}>
+          <CardInfo details={offer.details} />
+        </Box>
+      )}
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexGrow: 1,
+          flex: "1 1 0",
+          px: { xs: 4, md: 8 },
+          position: "relative",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            flexGrow: 1,
             gap: { xs: 6, md: 8 },
           }}
         >
@@ -147,7 +162,7 @@ export const OfferDetailsDrawer = ({
       <Box
         sx={{
           background: "#ffffff",
-          position: { xs: "sticky", md: "relative" },
+          position: "sticky",
           width: "100%",
           bottom: 0,
           left: 0,

@@ -38,8 +38,8 @@ Home.getLayout = (page: React.ReactElement) => (
       <title>Estácio</title>
     </Head>
 
-    {/*<Header />*/}
+    <Header />
     {page}
-    {/*<Footer />*/}
+    <Footer />
   </>
 );
