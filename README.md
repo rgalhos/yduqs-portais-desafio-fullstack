@@ -1,87 +1,107 @@
-# 🚀 Desafio Fullstack – Processo Seletivo
+# Yduqs Portal Fullstack
 
-Bem-vindo(a)! Este é o repositório base para o **Desafio Fullstack** da nossa etapa de seleção de novos colaboradores.
+# Manual do desenvolvedor
 
----
+## Back-end
 
-## 🎯 Objetivo
+O back-end deste projeto foi desenvolvido utilizando o framework _Nest.js_ (versão 11.0) com _Typescript_ (versão 5.7). Foi escolhido o _PostgreSQL_ como banco de dados e _Sequelize_ (versão 6.37) como ORM. Recomenda-se utilizar a versão **22.14.0 (LTS)** do _Node.js_ tanto para desenvolvimento quanto para produção.
 
-Construir uma aplicação **fullstack** onde usuários podem visualizar ofertas de cursos, selecionar um curso e realizar a matrícula.
+### Executando a aplicação
 
-O **handoff de design** está disponível no Figma:  
-🔗 [Acessar Figma](https://www.figma.com/design/jJLBqZG5RLoL9pbviYvAZW/Teste---Desenvolvimento?node-id=8-2156&t=FjZv9T176fS24B4e-0)  
-🔑 **Senha:** `Teste-123`
+As variáveis de ambientes são definidas através de um aquivo `.env` na raíz do back-end (`/api`).
 
----
+- `PORT` - Porta do back-end (Porta padrão: `3050`)
+- `DATABASE_HOST` - Host do banco de dados
+- `DATABASE_PORT` - Porta do banco de dados
+- `DATABASE_USER` - Usuário do banco de dados
+- `DATABASE_PASSWORD` - Senha do banco de dados
+- `DATABASE_DB` - Tabela do banco de dados
+- `EXPOSE_SWAGGER` - Variável para ativar o Swagger (valor de ativação: `true`)
 
-## 🛠️ Requisitos
+### Ambiente de desenvolvimento
 
-### Backend (Node.js + TypeScript)
-- Framework: **NestJS**  
-- Banco de dados: **PostgreSQL ou MongoDB**  
-- Estrutura em camadas (**controllers, services, repositories**)  
-- Validações de entrada (ex.: email válido, campos obrigatórios)  
-- Documentação da API (**Swagger ou similar**)  
-- Testes automatizados (**unitários e integração**)  
+Primeiramente é necessário instalar as dependências com o seguinte comando:
 
-### Frontend (React + TypeScript)
-- Framework: **React**  
-- Gerenciamento de estado: **Context API**  
-- Validações de formulário (email, telefone, etc.)  
-- Feedback ao usuário (**loading, erros, sucesso**)  
-- Design responsivo  
-- Testes com **React Testing Library**
+```shell
+npm ci
+```
 
-### Extras (opcional, diferencial)
-- Banco em **Docker** com migrations (**Prisma, TypeORM ou Sequelize**)  
-- Logs estruturados  
+Feito isso, pode-se iniciar o servidor de desenvolvimento com o seguinte comando:
 
----
+```shell
+npm run start:dev
+```
 
-## ✅ Regras Importantes
+O serviço estará disponível em `localhost:3500`.
 
-1. **Commits**: queremos acompanhar sua **evolução e raciocínio lógico**.  
-   - Faça **commits pequenos e frequentes**, mostrando sua linha de pensamento.  
-   - Não envie tudo em **um único commit final**.
+#### Estrutura dos diretórios
 
-2. **Uso de IA**: você pode usar IA como **fonte de consulta**, mas **não é permitido** gerar **100% do projeto apenas com IA**. Queremos ver **seu raciocínio e implementação**.
+- `/src` - Código-fonte
+  - `/src/core` - Arquivos principais de configuração
+  - `/src/core/database/migrations` - Migrações do banco de dados
+  - `/src/core/database/seeders` - Migrações do banco de dados
+  - `/src/modules` - Módulos da API
+    - `/src/modules/{módulo}` - Controllers, services, repositories, models e DTOs dos módulos
+    - `/src/core/{página}/{subpáginas}` - Subpáginas
+    - `/src/core/{página}/shared` - Resolvers, DTOs, Models e Services relacionados à `{pagina}`
+  - `/src/tests` - Testes da API
 
----
+### Ambiente de produção
 
-## 📊 Critérios de Avaliação
+#### Docker
 
-- **Qualidade do código** → clareza, boas práticas, clean code.  
-- **Arquitetura** → separação de responsabilidades, escalabilidade.  
-- **Validações e UX** → feedback claro ao usuário para erros e sucesso.  
-- **Testes** → cobertura e qualidade dos testes.  
-- **Documentação** → README explicando o setup.  
+A pasta raíz do projeto (`/`) contém um arquivo `docker-compose.yml` e pasta raíz do back-end (`/api`) contém um `Dockerfile` para facilitar o deploy dos serviços.
 
----
+#### Node
 
-## ▶️ Como começar
+Instale as dependências com `npm ci` e compile o projeto executando `npm run build`.
 
-1. Faça um **fork** deste repositório para a sua conta GitHub.  
-   - Clique no botão **Fork** no canto superior direito desta página.  
-   - Isso criará uma cópia do repositório no seu perfil.  
+A versão compilada do projeto será gerada na pasta `/dist`. Basta executar o comando `npm run start:prod`. O proxy reverso (por exemplo, NGINX) deve ser configurado para encaminhar as requisições ao serviço back-end.
 
-2. Clone o repositório que você acabou de forkear para a sua máquina local:  
-   ```bash
-   git clone https://github.com/<seu-usuario>/yduqs-portais-desafio-fullstack.git
-   ```
+## Front-end
 
-3. Acesse a pasta do projeto:  
-   ```bash
-   cd yduqs-portais-desafio-fullstack
-   ```
+Este projeto foi desenvolvido utilizando o framework _Next.js_ (versão 15) com _Typescript_ (versão 5.7) e a biblioteca de componentes _MUI_ (versão 7.3). Recomenda-se utilizar a versão **22.14.0 (LTS)** do _Node.js_ tanto para desenvolvimento quanto para produção.
 
-4. Configure e rode o **backend** e o **frontend** de acordo com os requisitos definidos.  
+### Executando a aplicação
 
-5. Desenvolva sua solução fazendo **commits pequenos e frequentes**, para que possamos acompanhar sua linha de raciocínio e evolução.  
+As variáveis de ambientes são definidas através de um aquivo `.env` na raíz do front-end (`/web`).
 
-6. Ao finalizar, envie o **link do seu fork** para avaliação.  
-   - Exemplo: `https://github.com/<seu-usuario>/yduqs-portais-desafio-fullstack`
+- `NEXT_PUBLIC_API_BASE_URL` - URL base para a API
 
----
+### Ambiente de desenvolvimento
 
-Boa sorte! 🚀  
-Estamos ansiosos para ver sua solução.
+Primeiramente é necessário instalar as dependências com o seguinte comando:
+
+```shell
+npm ci
+```
+
+Feito isso, pode-se iniciar o servidor de desenvolvimento com o seguinte comando:
+
+```shell
+npm run dev
+```
+
+O serviço estará disponível em `localhost:3000`.
+
+#### Estrutura dos diretórios
+
+- `/public` - Arquivos estáticos
+- `/src` - Código-fonte
+  - `/src/app` - Arquivos globais das rotas (Estilos)
+  - `/src/components` - Componentes compartilhados
+  - `/src/lib` - Árquivos úteis (hooks, utils)
+  - `/src/pages` - Páginas
+    - `/src/pages/{page}` - Página
+    - `/src/pages/{page}/_components` - Componentes específicos da página
+    - `/src/pages/{page}/_schemas` - Schemas de formulários (caso haja)
+    - `/src/pages/{page}/_actions` - Ações da API
+  - `/src/shared` - Arquivos que podem ser compartilhados entre server components e client components
+
+#### Docker
+
+A pasta raíz do projeto (`/`) contém um arquivo `docker-compose.yml` e pasta raíz do front-end (`/web`) contém um `Dockerfile` para facilitar o deploy dos serviços.
+
+#### Node
+
+Instale as dependências com `npm ci`, compile o projeto executando `npm run build` e inicie o servidor de produção com `npm run start`.
