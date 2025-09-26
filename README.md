@@ -34,6 +34,13 @@ npm run start:dev
 
 O serviço estará disponível em `localhost:3500`.
 
+É recomendado executar as migrações e os seeders com os seguintes comandos:
+
+```shell
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+```
+
 #### Estrutura dos diretórios
 
 - `/src` - Código-fonte
