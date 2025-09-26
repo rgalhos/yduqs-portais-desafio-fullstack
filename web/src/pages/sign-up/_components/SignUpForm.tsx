@@ -18,14 +18,20 @@ import { InputDate } from "@/components/InputDate/InputDate";
 import { InputCPF } from "@/components/InputCPF/InputCPF";
 import { InputControl } from "@/components/InputControl/InputControl";
 import { signupFormSchema, TSignUpFormData } from "../_schema/SignUpFormSchema";
-import { useRouter } from "next/router";
 
 export interface ISignUpFormProps {
+  offerId: number;
+  isPending: boolean;
+  isSuccess: boolean;
   onSubmit: (data: TSignUpFormData) => void;
 }
 
-export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
-  const router = useRouter();
+export const SignUpForm = ({
+  offerId,
+  isPending,
+  isSuccess,
+  onSubmit,
+}: ISignUpFormProps) => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const {
     register,
@@ -138,10 +144,9 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
           {...register("whatsappOptIn")}
         />
 
-        <input
-          type="hidden"
-          {...register("offerId", { value: router.query.id })}
-        />
+        {!isNaN(offerId) && (
+          <input type="hidden" {...register("offerId", { value: offerId })} />
+        )}
       </Stack>
 
       <Box mt={8}>
@@ -149,7 +154,7 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
           color="primary"
           variant="contained"
           type="submit"
-          disabled={!isValid || !acceptedTerms}
+          disabled={!isValid || !acceptedTerms || isPending || isSuccess}
         >
           Avançar
         </Button>
